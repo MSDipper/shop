@@ -46,7 +46,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
-    views = models.ManyToManyField(Ip, verbose_name='Просмотры', blank=True, null=True)
+    views = models.ManyToManyField(Ip, related_name="post_views", verbose_name='Просмотры', blank=True, null=True)
     slug = models.SlugField(max_length=250, unique=True, verbose_name='URL')
     category = models.ForeignKey(
         Category, 

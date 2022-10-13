@@ -14,13 +14,7 @@ def get_client_ip(request):
 
 def blog(request):
     post = Post.objects.all()
-    ip = get_client_ip(request)
 
-    if Ip.objects.filter(ip=ip).exists():
-        post.views.add(Ip.objects.get(ip=ip))
-    else:
-        Ip.objects.create(ip=ip)
-        post.views.add(Ip.objects.get(ip=ip))  
         
     context = {
         'post_list':post,
