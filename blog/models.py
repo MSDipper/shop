@@ -38,13 +38,22 @@ class Ip(models.Model):
         verbose_name = 'IP'
         verbose_name_plural = 'IP'
 
+class ImagesPost(models.Model):
+    post_image = models.ImageField(upload_to='image_mini/', verbose_name='Мини изображение', null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.post_image}"
+    
+    
+    class Meta:
+        verbose_name = 'Изображение к посту'
+        verbose_name_plural = 'Изображения к посту'
 
 class Post(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
-    mini_image = models.ImageField(upload_to='image_mini/', verbose_name='Мини изображение')
+    mini_images = models.ForeignKey(ImagesPost, verbose_name='Изображение к посту', on_delete=models.SET_NULL, null=True, blank=True)
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     views = models.ManyToManyField(Tag, verbose_name='Просмотры')
