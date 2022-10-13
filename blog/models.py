@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from django.urls import reverse
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
@@ -69,6 +72,10 @@ class Post(models.Model):
     def total_views(self):
         ''' Счётчик просмотров '''
         return self.views.count()
+    
+    def get_absolute_url(self):
+        return reverse("post_detail", kwargs={"slug": self.slug})
+    
 
 class Comment(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=150)

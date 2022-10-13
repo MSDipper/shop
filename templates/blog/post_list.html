@@ -96,11 +96,11 @@
                                 <div class="blog_post">
                                     <img src="{{ post.image.url }}" alt="">
                                     <div class="blog_details">
-                                        <a href="single-blog.html">
+                                        <a href="{{ post.get_absolute_url}}">
                                             <h2>{{ post.title }}</h2>
                                         </a>
-                                        <p>{{ post.description|truncatewords:'40'|safe }}</p>
-                                        <a href="single-blog.html" class="white_bg_btn">View More</a>
+                                        <p>{{ post.description|safe|truncatewords:'40' }}</p>
+                                        <a href="{{ post.get_absolute_url}}" class="white_bg_btn">View More</a>
                                     </div>
                                 </div>
                             </div>
