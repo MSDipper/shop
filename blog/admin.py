@@ -17,6 +17,8 @@ class TagAdmin(admin.ModelAdmin):
     save_as = True
     save_on_top = True 
     
+
+
    
 
 @admin.register(Post)
@@ -24,6 +26,8 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',), }
     save_as = True
     save_on_top = True 
+
+
 
 admin.site.register(Ip)
 admin.site.register(Comment)

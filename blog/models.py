@@ -38,25 +38,15 @@ class Ip(models.Model):
         verbose_name = 'IP'
         verbose_name_plural = 'IP'
 
-class ImagesPost(models.Model):
-    post_image = models.ImageField(upload_to='image_mini/', verbose_name='Мини изображение', null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.post_image}"
-    
-    
-    class Meta:
-        verbose_name = 'Изображение к посту'
-        verbose_name_plural = 'Изображения к посту'
 
 class Post(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
-    mini_images = models.ForeignKey(ImagesPost, verbose_name='Изображение к посту', on_delete=models.SET_NULL, null=True, blank=True)
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
-    views = models.ManyToManyField(Tag, verbose_name='Просмотры')
+    views = models.ManyToManyField(Ip, verbose_name='Просмотры', blank=True, null=True)
     slug = models.SlugField(max_length=250, unique=True, verbose_name='URL')
     category = models.ForeignKey(
         Category, 
@@ -66,7 +56,7 @@ class Post(models.Model):
         null=True,
         blank=True
         )
-    tag = models.ManyToManyField(Tag, related_name='tag', verbose_name='Тег')
+    tag = models.ManyToManyField(Tag, related_name='post', verbose_name='Тег')
     
     def __str__(self):
         return self.title
@@ -75,6 +65,10 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+    
+    def total_views(self):
+        ''' Счётчик просмотров '''
+        return self.views.count()
 
 class Comment(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=150)
