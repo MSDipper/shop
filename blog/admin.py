@@ -29,5 +29,6 @@ class PostAdmin(admin.ModelAdmin):
 
 
 
+
 admin.site.register(Ip)
 admin.site.register(Comment)

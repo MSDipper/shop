@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
@@ -49,7 +50,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
-    views = models.ManyToManyField(Ip, related_name="post_views", verbose_name='Просмотры', blank=True, null=True)
+    views = models.ManyToManyField(Ip, related_name="post_views", verbose_name='Просмотры', default=0)
     slug = models.SlugField(max_length=250, unique=True, verbose_name='URL')
     category = models.ForeignKey(
         Category, 
@@ -72,6 +73,8 @@ class Post(models.Model):
     def total_views(self):
         ''' Счётчик просмотров '''
         return self.views.count()
+    
+
     
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
