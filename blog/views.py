@@ -1,6 +1,10 @@
+from itertools import count
+from unicodedata import category
 from django.shortcuts import render
-from blog.models import Post, Ip
+from blog.models import Post, Ip, Category
 from django.shortcuts import get_object_or_404
+from django.db.models import Count
+
 
 def get_client_ip(request):
     ''' Просмотры '''
@@ -22,7 +26,8 @@ def blog(request):
 
 
 def blog_detail(request, slug):
-    post = get_object_or_404(Post,slug=slug)
+    post = get_object_or_404(Post, slug=slug)
+    categories = Category.objects.annotate(category_count=Count('post'))
     
     ip = get_client_ip(request)
 
@@ -34,5 +39,6 @@ def blog_detail(request, slug):
         
     context = {
         'post':post,
+        'categories':categories,
     }
     return render(request, 'blog/post_detail.html', context)
