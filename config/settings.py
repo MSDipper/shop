@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     
     'ckeditor',
     
+    'shop.apps.ShopConfig',
     'blog.apps.BlogConfig',
+    # 'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
