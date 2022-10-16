@@ -72,6 +72,7 @@ class Product(models.Model):
     create_at = models.DateTimeField(verbose_name='Добавлено', auto_now_add=True)
     availibility = models.CharField(verbose_name='Статус доступности', max_length=50)
     quantity = models.IntegerField(verbose_name='Количество', default=1)
+    slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
     description = models.TextField(verbose_name='Описание')
     category = models.ForeignKey(
         Category, 
