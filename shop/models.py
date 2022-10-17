@@ -1,6 +1,6 @@
-from email.policy import default
 from django.db import models
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -76,7 +76,7 @@ class Product(models.Model):
     quantity = models.IntegerField(verbose_name='Количество', default=1)
     main_image = models.ImageField(upload_to='images/', verbose_name='Главное изображение продукта', null=True)
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True, null=True)
-    description = models.TextField(verbose_name='Описание')
+    description = RichTextField(verbose_name='Описание')
     category = models.ForeignKey(
         Category, 
         related_name='product',
@@ -90,7 +90,7 @@ class Product(models.Model):
         related_name='product',
         verbose_name='Бренд'
         )
-    brand = models.ManyToManyField(
+    specification = models.ManyToManyField(
         Specification, 
         related_name='product',
         verbose_name='Характеристики'
