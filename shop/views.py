@@ -1,11 +1,8 @@
 from django.shortcuts import render
-
-
+from django.views.generic import ListView
 from shop.models import Product
 
-def shop(request):
-    product = Product.objects.all()[:6]
-    context = {
-        'product_list':product,
-    }
-    return render(request, 'shop/shop_list.html', context)
+class ShopListView(ListView):
+    model = Product
+    paginate_by = 3
+    template_name = 'shop/shop_list.html'
