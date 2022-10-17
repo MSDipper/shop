@@ -218,7 +218,7 @@
 								<div class="single-product">
 									<img class="img-fluid" src="{{ product.main_image.url }}" alt="">
 									<div class="product-details">
-										<h6>{{ product.title }}</h6>
+										<a href="{{ product.get_absolute_url }}"><h6>{{ product.title }}</h6></a>
 										<div class="price">
 											<h6>${{ product.price }}</h6>
 											<h6 class="l-through">${{ product.old_price }}</h6>
@@ -237,7 +237,7 @@
 												<span class="lnr lnr-sync"></span>
 												<p class="hover-text">compare</p>
 											</a>
-											<a href="" class="social-info">
+											<a href="{{ product.get_absolute_url }}" class="social-info">
 												<span class="lnr lnr-move"></span>
 												<p class="hover-text">view more</p>
 											</a>

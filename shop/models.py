@@ -1,6 +1,6 @@
 from email.policy import default
 from django.db import models
-
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -49,7 +49,7 @@ class Specification(models.Model):
         verbose_name_plural = 'Характеристики'
         
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}'  
 
 class ImageProduct(models.Model):
     """ Изображение """
@@ -101,14 +101,17 @@ class Product(models.Model):
         verbose_name='Изображения'
         )
     
-    def __str__(self):
-        return self.title
-    
-    
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-
+        
+        
+    def __str__(self):
+        return self.title
+    
+        
+    def get_absolute_url(self):
+        return reverse("product_single", kwargs={"slug": self.slug})
     
 
 class Comment(models.Model):
