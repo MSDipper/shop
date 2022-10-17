@@ -33,21 +33,23 @@ class Brand(models.Model):
         
 class Specification(models.Model):
     """ Характеристика """
+    name = models.CharField(verbose_name='Название', max_length=150, blank=True, null=True)
     width = models.IntegerField(verbose_name='Ширина')
     height = models.IntegerField(verbose_name='Высота')
     depth = models.IntegerField(verbose_name='Глубина')
     weight = models.IntegerField(verbose_name='Масса')
-    quality_checking = models.CharField(max_length=250, verbose_name='Проверка качества')
+    quality_checking = models.CharField(max_length=150, verbose_name='Проверка качества')
     freshness_duration = models.IntegerField(verbose_name='Свежесть')
-    when_packeting = models.CharField(max_length=250, verbose_name='При упаковке')
+    when_packeting = models.CharField(max_length=150, verbose_name='При упаковке')
     
-    def __str__(self):
-        return f'{self.width}-{self.height}'
+
     
     class Meta:
         verbose_name = 'Характеристика'
         verbose_name_plural = 'Характеристики'
-
+        
+    def __str__(self):
+        return f'{self.name}'
 
 class ImageProduct(models.Model):
     """ Изображение """
@@ -72,7 +74,8 @@ class Product(models.Model):
     create_at = models.DateTimeField(verbose_name='Добавлено', auto_now_add=True)
     availibility = models.CharField(verbose_name='Статус доступности', max_length=50)
     quantity = models.IntegerField(verbose_name='Количество', default=1)
-    slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
+    main_image = models.ImageField(upload_to='images/', verbose_name='Главное изображение продукта', null=True)
+    slug = models.SlugField(max_length=150, verbose_name='URL', unique=True, null=True)
     description = models.TextField(verbose_name='Описание')
     category = models.ForeignKey(
         Category, 
