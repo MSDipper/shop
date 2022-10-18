@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from shop.models import Product
+from cart.forms import CartAddProductForm
 
 class ShopListView(ListView):
     model = Product
@@ -18,4 +19,9 @@ def product_detail(request, id, slug):
                                 slug=slug,
                                 published=True
                                 )
-    return render(request,'shop/product_detail.html', {'product': product})
+    cart_product_form = CartAddProductForm()
+    context = {
+        'product': product,
+        'cart_product_form':cart_product_form,
+    }
+    return render(request,'shop/product_detail.html', context)
