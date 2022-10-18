@@ -8,6 +8,8 @@ class Category(models.Model):
     name = models.CharField(max_length=150, verbose_name='Имя')
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
     
+    def get_absolute_url(self):
+        return reverse('product_list_by_category', args=[self.slug])
     
     def __str__(self):
         return self.name
@@ -102,6 +104,7 @@ class Product(models.Model):
         )
     
     class Meta:
+        index_together = (('id', 'slug'),)
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         
@@ -111,7 +114,7 @@ class Product(models.Model):
     
         
     def get_absolute_url(self):
-        return reverse("product_single", kwargs={"slug": self.slug})
+        return reverse('product_single', args=[self.id, self.slug])
     
 
 class Comment(models.Model):

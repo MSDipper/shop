@@ -1,16 +1,21 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 from shop.models import Product
 
 class ShopListView(ListView):
     model = Product
     paginate_by = 3
-    template_name = 'shop/shop_list.html'
+    template_name = 'shop/product_list.html'
+    
+    def get_queryset(self):
+        return Product.objects.filter(published=True)
     
     
-
-class ShopDetailView(DetailView):
-    model = Product
-    context_object_name = 'product'
-    slug_url_kwarg = 'slug'
-    template_name = 'shop/shop_detail.html'
+    
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product,
+                                id=id,
+                                slug=slug,
+                                published=True
+                                )
+    return render(request,'shop/product_detail.html', {'product': product})

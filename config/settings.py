@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'ckeditor',
     
+    'cart.apps.CartConfig',
     'shop.apps.ShopConfig',
     'blog.apps.BlogConfig',
     # 'pages.apps.PagesConfig',
@@ -136,3 +137,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+CART_SESSION_ID = 'cart'
