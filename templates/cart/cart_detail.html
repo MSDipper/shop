@@ -34,29 +34,36 @@
                         <tbody>
                             {% for item in cart %}
                                 {% with product=item.product %}
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="{{ product.main_image.url }}" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>{{ product.title }}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${{ product.price }}</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            {{ item.quantity }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${{ item.total_price }}</h5>
-                                    </td>
-                                </tr>
+                                    {% if cart|length > 0 %}
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="d-flex">
+                                                        <img src="{{ product.main_image.url }}" alt="">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p>{{ product.title }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>${{ product.price }}</h5>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    {{ item.quantity }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>${{ item.total_price }}</h5>
+                                            </td>
+                                            <td>
+                                                <h5><a href="{% url 'cart_remove' product.id%}">Remove</a></h5>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        Your cart is empty.
+                                    {% endif %}
                                 {% endwith %}
                             {% endfor %}
                             <tr class="bottom_button">
@@ -64,8 +71,8 @@
                                     <a class="gray_btn" href="#">Update Cart</a>
                                 </td>
                                 <td>
-
-                                </td>
+                                   
+                                    </td>
                                 <td>
 
                                 </td>
