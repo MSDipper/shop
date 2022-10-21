@@ -11,13 +11,13 @@ def order_create(request):
         if form.is_valid():
             order = form.save()
             for item in cart:
-                OrderItemList.objects.create(order=order,
+                OrderItemList.objects.create(
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
             # очистка корзины
             cart.clear()
-            return render(request, 'orders/checkout.html',
+            return render(request, 'orders/created.html',
                           {'order': order})
     else:
         form = OrderCreateForm

@@ -8,30 +8,31 @@ class Category(models.Model):
     name = models.CharField(max_length=150, verbose_name='Имя')
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
     
-    def get_absolute_url(self):
-        return reverse('product_list_by_category', args=[self.slug])
-    
-    def __str__(self):
-        return self.name
     
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         
-        
+    def get_absolute_url(self):
+        return reverse('product_list_by_category', args=[self.slug])
+    
+    def __str__(self):
+        return self.name        
+          
         
 class Brand(models.Model):
     """ Бренд """
     name = models.CharField(max_length=150, verbose_name='Имя')
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
     
-    
-    def __str__(self):
-        return self.name
-    
+
     class Meta:
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
+        
+    def __str__(self):
+        return self.name
+        
         
 class Specification(models.Model):
     """ Характеристика """
@@ -45,28 +46,29 @@ class Specification(models.Model):
     when_packeting = models.CharField(max_length=150, verbose_name='При упаковке')
     
 
-    
     class Meta:
         verbose_name = 'Характеристика'
         verbose_name_plural = 'Характеристики'
         
+        
     def __str__(self):
         return f'{self.name}'  
+
 
 class ImageProduct(models.Model):
     """ Изображение """
     image = models.ImageField(upload_to='images/', verbose_name='Изображения к продукту')
-    
-    def __str__(self):
-        return f'{self.image}'
     
     
     class Meta:
         verbose_name = 'Изображение к продукту'
         verbose_name_plural = 'Изображения к продукту'
 
-    
 
+    def __str__(self):
+        return f'{self.image}'
+    
+    
 class Product(models.Model):
     """ Товар """
     title = models.CharField(max_length=250, verbose_name='Заголовок')
@@ -102,6 +104,7 @@ class Product(models.Model):
         related_name='product',
         verbose_name='Изображения'
         )
+    
     
     class Meta:
         index_together = (('id', 'slug'),)
@@ -140,24 +143,29 @@ class Comment(models.Model):
         null=True
     )
 
-    def __str__(self):
-        return f'{self.name} - {self.email}'
-    
+
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+        
+        
+    def __str__(self):
+        return f'{self.name} - {self.email}'    
+
 
 class RatingStar(models.Model):
     """ Звезда рейтинга """
     value = models.SmallIntegerField("Значение", default=0)
 
-    def __str__(self):
-        return f'{self.value}'
 
     class Meta:
         verbose_name = "Звезда рейтинга"
         verbose_name_plural = "Звезды рейтинга"
         ordering = ["-value"]
+        
+        
+    def __str__(self):
+        return f'{self.value}'    
         
         
         

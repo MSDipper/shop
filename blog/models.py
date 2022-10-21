@@ -10,13 +10,13 @@ class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
     slug = models.SlugField(max_length=200, verbose_name='URL', unique=True)
     
-    
-    def __str__(self):
-        return self.name
-    
+
     class Meta:
         verbose_name = 'Категории'
         verbose_name_plural = 'Категории'
+    
+    def __str__(self):
+        return self.name
 
 
 
@@ -24,34 +24,42 @@ class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Name')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
     
-    def __str__(self):
-        return self.name
     
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
+    
+    def __str__(self):
+        return self.name
 
 
 class Ip(models.Model): 
     ip = models.CharField(max_length=100)
     
-    def __str__(self):
-        return f'{self.ip}'
-    
+
     class Meta:
         verbose_name = 'IP'
         verbose_name_plural = 'IP'
 
+    def __str__(self):
+        return f'{self.ip}'
 
 
 class Post(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
-    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.SET_NULL, null=True, blank=True)
+   
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     views = models.ManyToManyField(Ip, related_name="post_views", verbose_name='Просмотры', default=0)
     slug = models.SlugField(max_length=250, unique=True, verbose_name='URL')
+    author = models.ForeignKey(
+        User,
+        verbose_name='Автор',
+        on_delete=models.SET_NULL,
+        null=True, 
+        blank=True
+        )
     category = models.ForeignKey(
         Category, 
         related_name='post',
@@ -62,13 +70,13 @@ class Post(models.Model):
         )
     tag = models.ManyToManyField(Tag, related_name='post', verbose_name='Тег')
     
-    def __str__(self):
-        return self.title
-    
-    
+
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+        
+    def __str__(self):
+        return self.title
     
     def total_views(self):
         ''' Счётчик просмотров '''
@@ -88,9 +96,11 @@ class Comment(models.Model):
     message = models.TextField(max_length=500, verbose_name='Текст')
     post = models.ForeignKey(Post, related_name='comment', verbose_name='Комментарий', on_delete=models.SET_NULL, blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.name} - {self.email}'
-    
+
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+        
+    def __str__(self):
+        return f'{self.name} - {self.email}'
+    
