@@ -21,6 +21,9 @@ class Order(models.Model):
     def __str__(self):
         return self.first_name
     
+    def get_total_cost(self):
+        return sum(item.get_cost() for item in self.items.all())
+    
 
 class OrderItemList(models.Model):
     ''' Данные заказчика '''
@@ -53,5 +56,8 @@ class OrderItemList(models.Model):
        
         
     def __str__(self):
-        return self.product
+        return f'{self.product} - {self.order}'
     
+    
+    def get_cost(self):
+        return self.price * self.quantity
