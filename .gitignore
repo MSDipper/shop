@@ -22,6 +22,8 @@ media/*
 
 log/debug.log
 
+.env/
+
 build
 doc
 home.rst
