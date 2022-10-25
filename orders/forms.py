@@ -1,10 +1,17 @@
 from orders.models import Order
 from django import forms
+from captcha.fields import CaptchaField
 
 
 class OrderCreateForm(forms.ModelForm):
+    captcha = CaptchaField(
+                label='Введите информацию с картинки',
+                error_messages={'invalid':'Неправильный ввод'}
+                )
+    
     class Meta:
         model = Order
+        
         fields = [
                 'first_name',
                 'last_name', 
