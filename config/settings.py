@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     
     "phonenumber_field",
     'ckeditor',
+    'captcha',
     
     'orders.apps.OrdersConfig',
     'cart.apps.CartConfig',
