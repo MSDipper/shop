@@ -22,7 +22,7 @@ media/*
 
 log/debug.log
 
-.env/*
+.env
 
 build
 doc
