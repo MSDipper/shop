@@ -1,10 +1,11 @@
 from orders.models import Order
 from django import forms
-from captcha.fields import CaptchaField
-
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 class OrderCreateForm(forms.ModelForm):
-    captcha = CaptchaField(
+    captcha = ReCaptchaField(
+                widget=ReCaptchaV2Checkbox,
                 label='Введите информацию с картинки',
                 error_messages={'invalid':'Неправильный ввод'}
                 )

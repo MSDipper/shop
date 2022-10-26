@@ -137,21 +137,26 @@ STATIC_URL = 'static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CART_SESSION_ID = 'cart'
 
-CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
-CAPTCHA_FONT_SIZE = 30
-CAPTCHA_LETTER_ROTATION = (-60, 60)
-CAPTCHA_BACKGROUND_COLOR = '#000000'
-CAPTCHA_FOREGROUND_COLOR = '#000bff'
+#CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+# CAPTCHA_WORDS_DICTIONARY = 'config/captcha_words/WORDS.txt'
+# CAPTCHA_FONT_SIZE = 30
+# CAPTCHA_LETTER_ROTATION = (-60, 60)
+# CAPTCHA_BACKGROUND_COLOR = '#000000'
+# CAPTCHA_FOREGROUND_COLOR = '#000bff'
+
+RECAPTCHA_PUBLIC_KEY = '6Ld55LYiAAAAAP0ufFksWlGZXzc8wwWwV_bIq-Dk'
+RECAPTCHA_PRIVATE_KEY = '6Ld55LYiAAAAAEm6VxsdutZHuGj95JZA2DrRNtj8'
+

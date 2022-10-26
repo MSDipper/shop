@@ -27,7 +27,7 @@ class Order(models.Model):
 
 class OrderItemList(models.Model):
     ''' Данные заказчика '''
-    order = models.ForeignKey(
+    order = models.OneToOneField(
         Order, 
         related_name='items', 
         on_delete=models.SET_NULL,
