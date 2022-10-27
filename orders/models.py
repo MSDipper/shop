@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from shop.models import Product
 from phonenumber_field.modelfields import PhoneNumberField
@@ -11,7 +12,13 @@ class Order(models.Model):
     phone = PhoneNumberField(verbose_name='Телефон')
     address = models.CharField(verbose_name='Адрес', max_length=150)
     city = models.CharField(verbose_name='Город', max_length=150)
-
+    notes = models.TextField(
+        max_length=500, 
+        verbose_name='Примечания к заказу',
+        null=True,
+        blank=True
+        )
+    
 
     class Meta:
         verbose_name = 'Заказ'
@@ -27,7 +34,7 @@ class Order(models.Model):
 
 class OrderItemList(models.Model):
     ''' Данные заказчика '''
-    order = models.OneToOneField(
+    order = models.ForeignKey(
         Order, 
         related_name='items', 
         on_delete=models.SET_NULL,
@@ -41,7 +48,6 @@ class OrderItemList(models.Model):
         verbose_name='Продукт',
         on_delete=models.SET_NULL,
         null=True, 
-        blank=True,
         )
     price = models.DecimalField(
         max_digits=10, decimal_places=2,
