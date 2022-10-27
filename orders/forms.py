@@ -6,8 +6,7 @@ from captcha.widgets import ReCaptchaV2Checkbox
 class OrderCreateForm(forms.ModelForm):
     captcha = ReCaptchaField(
                 widget=ReCaptchaV2Checkbox,
-                label='Введите информацию с картинки',
-                error_messages={'invalid':'Неправильный ввод'}
+                error_messages={'invalid':'Повторите'}
                 )
     
     class Meta:
