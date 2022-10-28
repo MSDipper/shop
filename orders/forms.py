@@ -3,20 +3,22 @@ from django import forms
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
+
 class OrderCreateForm(forms.ModelForm):
     captcha = ReCaptchaField(
                 widget=ReCaptchaV2Checkbox,
                 error_messages={'invalid':'Повторите'}
                 )
     
+    
     class Meta:
         model = Order
-        
         fields = [
                 'first_name',
                 'last_name', 
                 'company_name',
                 'phone', 
+                'email',
                 'address',
                 'city'
                   ]
@@ -46,6 +48,13 @@ class OrderCreateForm(forms.ModelForm):
                     attrs={
                         'type': "text",
                         'placeholder': "Номер",
+                        'class': "form-control"
+                    }
+                ),
+                "email": forms.TextInput(
+                    attrs={
+                        'type': "text",
+                        'placeholder': "Email",
                         'class': "form-control"
                     }
                 ),

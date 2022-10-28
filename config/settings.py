@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from email.mime import application
 from pathlib import Path
 
 import os
@@ -150,13 +151,22 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CART_SESSION_ID = 'cart'
 
-#CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
-# CAPTCHA_WORDS_DICTIONARY = 'config/captcha_words/WORDS.txt'
-# CAPTCHA_FONT_SIZE = 30
-# CAPTCHA_LETTER_ROTATION = (-60, 60)
-# CAPTCHA_BACKGROUND_COLOR = '#000000'
-# CAPTCHA_FOREGROUND_COLOR = '#000bff'
+# RECAPTCHA_v2 settings
 
 RECAPTCHA_PUBLIC_KEY = '6Ld55LYiAAAAAP0ufFksWlGZXzc8wwWwV_bIq-Dk'
 RECAPTCHA_PRIVATE_KEY = '6Ld55LYiAAAAAEm6VxsdutZHuGj95JZA2DrRNtj8'
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# REDIS settings
+
+REDIS_HOST = '0.0.0.0'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT +'/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from orders.models import OrderItemList
 from orders.forms import OrderCreateForm
 from cart.cart import Cart
+from orders.tasks import order_created
 
 
 def order_create(request):
@@ -17,6 +18,8 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистка корзины
             cart.clear()
+            # запуск асинхронной задачи
+            order_created.delay(order.id)
             return render(request, 'orders/created.html',
                           {'order': order})
     else:
