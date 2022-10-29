@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'captcha',
     
+    'coupons.apps.CouponsConfig',
     'orders.apps.OrdersConfig',
     'cart.apps.CartConfig',
     'shop.apps.ShopConfig',
