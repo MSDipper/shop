@@ -2,6 +2,7 @@ from django.shortcuts import render
 from orders.models import OrderItemList
 from orders.forms import OrderCreateForm
 from cart.cart import Cart
+from orders.service import send_mess
 from orders.tasks import order_created
 
 

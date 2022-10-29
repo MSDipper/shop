@@ -156,8 +156,15 @@ CART_SESSION_ID = 'cart'
 RECAPTCHA_PUBLIC_KEY = '6Ld55LYiAAAAAP0ufFksWlGZXzc8wwWwV_bIq-Dk'
 RECAPTCHA_PRIVATE_KEY = '6Ld55LYiAAAAAEm6VxsdutZHuGj95JZA2DrRNtj8'
 
-
+# Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# SMTP
+EMAIL_USE_TLS = True
+EMAIL_HOSTS = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'test@gmail.com'
+EMAIL_HOST_PASSWORD = 'test336727006'
+EMAIL_PORT = 587
 
 
 # REDIS settings
