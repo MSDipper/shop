@@ -43,7 +43,6 @@
 						<form action="{% url 'cart_add' product.id%}" method="post">
 							{% csrf_token %}
 							<div class="product_count">
-								
 								{{ cart_product_form }}
 							</div>
 							<div class="card_area d-flex align-items-center">

@@ -91,12 +91,30 @@
                                 <td>
 
                                 </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>${{ cart.get_total_price }}</h5>
-                                </td>
+                                {% if cart.coupon %}
+                                    <tr class="subtotal">
+                                        <td>Subtotal</td>
+                                        <td colspan="4"></td>
+                                        <td class="num">${{ cart.get_total_price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            "{{ cart.coupon.code }}" coupon
+                                            ({{ cart.coupon.discount }}% off)
+                                        </td>
+                                        <td colspan="4"></td>
+                                        <td class="num neg">
+                                            - ${{ cart.get_discount|floatformat:"2" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr class="total">
+                                    <td>Total</td>
+                                    <td colspan="4"></td>
+                                    <td class="num">
+                                        ${{ cart.get_total_price_after_discount|floatformat:"2" }}
+                                    </td>
+                                </tr>
                             </tr>
                             <tr class="shipping_area">
                                 <td>
@@ -151,6 +169,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    <form action='{% url "apply" %}' method="post">
+                        {{ coupon_apply_form }}
+                        <input type="submit"class="gray_btn" value="Apply">
+                        {% csrf_token %}
+                    </form>
                 </div>
             </div>
         </div>
