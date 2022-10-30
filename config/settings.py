@@ -50,12 +50,13 @@ INSTALLED_APPS = [
     'ckeditor',
     'captcha',
     
+    'accounts.apps.AccountsConfig',    
     'coupons.apps.CouponsConfig',
     'orders.apps.OrdersConfig',
     'cart.apps.CartConfig',
     'shop.apps.ShopConfig',
     'blog.apps.BlogConfig',
-    # 'pages.apps.PagesConfig',
+
 ]
 
 MIDDLEWARE = [
