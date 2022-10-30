@@ -2,6 +2,9 @@ from tabnanny import verbose
 from django.db import models
 from shop.models import Product
 from phonenumber_field.modelfields import PhoneNumberField
+from decimal import Decimal
+from django.core.validators import MinValueValidator, MaxValueValidator
+from coupons.models import Coupon
 
 
 class Order(models.Model):
@@ -19,6 +22,18 @@ class Order(models.Model):
         null=True,
         blank=True
         )
+    coupon = models.ForeignKey(Coupon,
+                                related_name='orders',
+                                on_delete=models.SET_NULL,
+                                null=True,
+                                blank=True,
+                                verbose_name='Купон'
+                                )
+    discount = models.IntegerField(default=0,
+                                verbose_name='Процент скидки купона',
+                                validators=[MinValueValidator(0),
+                                            MaxValueValidator(100)]
+                                    )
     
 
     class Meta:
