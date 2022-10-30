@@ -108,12 +108,12 @@
                             </ul>
                             <ul class="list list_2">
                                 {% for item in cart %}
-
-                                <li><a href="#">Subtotal <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span></a></li>
+                                <li>
+                                    <a href="#">Subtotal <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span>
+                                    </a>
+                                </li>
                             
                                 {% endfor %}
-                           
-
                             </ul>
                             <div class="payment_item">
                                 <div class="radion_btn">
