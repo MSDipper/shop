@@ -91,7 +91,17 @@
 
                                 {% for item in cart %}
 
-                                <li><a href="#">{{ item.product.title|truncatewords:2 }} <span class="middle">x {{ item.quantity }}</span> <span class="last">${{ item.price }}</span></a></li>
+                                <li><a href="#">{{ item.product.title|truncatewords:2 }} <span class="middle">x {{ item.quantity }}</span> 
+                                        <span class="last">${{ item.price }}</span>
+                                    </a>
+                                </li>
+                                {% if cart.coupon %}
+                                <li>
+                                    <a href="#">{{ cart.coupon.code }} <span class="middle"> {{ cart.coupon.discount }}% off</span> 
+                                        <span class="last">${{ cart.get_discount|floatformat:"2" }}</span>
+                                    </a>
+                                </li>
+                                {% endif %}
                             
                                 {% endfor %}
 
@@ -99,7 +109,7 @@
                             <ul class="list list_2">
                                 {% for item in cart %}
 
-                                <li><a href="#">Subtotal <span>${{ item.total_price }}</span></a></li>
+                                <li><a href="#">Subtotal <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span></a></li>
                             
                                 {% endfor %}
                            
