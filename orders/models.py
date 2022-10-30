@@ -8,7 +8,7 @@ from coupons.models import Coupon
 
 
 class Order(models.Model):
-    ''' Заказы посетителей '''
+    ''' Данные заказчика '''
     first_name = models.CharField(max_length=150, verbose_name='Имя')
     last_name = models.CharField(max_length=150, verbose_name='Фамилия')
     company_name = models.CharField(max_length=150, verbose_name='Компания')
@@ -37,19 +37,20 @@ class Order(models.Model):
     
 
     class Meta:
-        verbose_name = 'Заказ'
-        verbose_name_plural = 'Заказы'
+        verbose_name = 'Данные заказчика'
+        verbose_name_plural = 'Данные заказчика'
   
         
     def __str__(self):
         return self.first_name
     
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return total_cost - total_cost * (self.discount / Decimal('100'))
     
 
 class OrderItemList(models.Model):
-    ''' Данные заказчика '''
+    ''' Заказы посетителей '''
     order = models.ForeignKey(
         Order, 
         related_name='items', 
@@ -73,8 +74,8 @@ class OrderItemList(models.Model):
 
 
     class Meta:
-        verbose_name = 'Данные заказчика'
-        verbose_name_plural = 'Данные заказчика'
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказ'
        
         
     def __str__(self):
