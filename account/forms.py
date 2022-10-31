@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.utils.translation import gettext_lazy as _
+
+User = get_user_model()
 
 
 class AuthenticationForm(UserCreationForm):
@@ -9,11 +12,7 @@ class AuthenticationForm(UserCreationForm):
         max_length=254,
         widget=forms.EmailInput(attrs={'autocomplete': 'email'})
     )
-    
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({'class':"form-control",'placeholder': 'Email'})
-        # self.fields['password'].widget.attrs.update({'class':"form-control",'placeholder': 'Password'})
-        
-    
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ("username", "email")

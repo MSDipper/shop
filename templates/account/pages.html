@@ -23,49 +23,32 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					{% if request.user.is_authenticated %}
 					<div class="login_box_img">
 						<img class="img-fluid" src="/static/img/login.jpg" alt="">
 						<div class="hover">
-							<h4>There are advances being made in science and technology everyday, and a good example of this is the</h4></div>
-					</div>
-					</div>
-					<div class="col-lg-6">
-					<div class="login_form_inner">
-						<h3>Login to enter</h3>
-						<a href="{% url 'logout' %}"class="primary-btn">Logout</a>
-						{% else %}
-						<div class="login_box_img">
-							<img class="img-fluid" src="/static/img/login.jpg" alt="">
-							<div class="hover">
-								<h4>New to our website?</h4>
-								<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-								<a class="primary-btn" href="registration.html">Create an Account</a>
-							</div>
+							<h4>New to our website?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							{% if not request.user.is_authenticated %}
+							<a class="primary-btn" href="{% url 'register' %}">Create an Account</a>
+							{% else %}
+
+							{% endif %}
+
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="login_form_inner">
-							<h3>Log in to enter</h3>
-						<form class="row login_form" action="" method="post" id="contactForm" novalidate="novalidate">
-							{% csrf_token %}
-							{{ form.as_p }}
-							{% comment %} <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
-							</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Log in to enter</h3>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-							</div> {% endcomment %}
 
-							<div class="col-md-12 form-group">
-								<div class="creat_account">
+							{% if request.user.is_authenticated %}
+								<a  href="{% url 'logout' %}" class="primary-btn">Log Out</button>
+							{% else %}
+							<a  href="{% url 'login' %}" class="primary-btn">Log In</button>
+							{% endif %}
+							
 								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<a href="{% url 'login' %}" style="color: white;" class="primary-btn">Log In</button>
-							</div>
-						</form>
-						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -73,5 +56,4 @@
 	</section>
 	<!--================End Login Box Area =================-->
 
-	
 {% endblock content %}

@@ -124,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'account.User'
 
+LOGIN_REDIRECT_URL = 'pages'
 LOGOUT_REDIRECT_URL = 'pages'
 
 # Internationalization

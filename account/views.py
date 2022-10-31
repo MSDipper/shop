@@ -4,11 +4,12 @@ from django.shortcuts import render, redirect
 from account.forms import AuthenticationForm
 from django.views.generic import TemplateView
 
+
 class PagesPage(TemplateView):
     template_name = 'account/pages.html'
     
 
-class Register(View):
+class RegisterUser(View):
     template_name = 'account/register/register.html'
 
     def get(self, request):
@@ -26,7 +27,7 @@ class Register(View):
             password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=password)
             login(request, user)
-            return redirect('shop')
+            return redirect('pages')
         context = {
             'form': form
         }

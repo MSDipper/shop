@@ -34,14 +34,13 @@
 						<h3>Login to enter</h3>
 						
 
-    <form class="row login_form" action="#" method="post" id="contactForm" novalidate="novalidate">
-        <div class="col-md-12 form-group">
-           
-			<p>Адрес электронной почты:</p>{{ form.username }}
-            <p>Пароль:</p>{{ form.password }}
-        </div>
-            {% csrf_token %}
-            </form>
+					<form class="row login_form" action="{% url 'login' %}" method="post" id="contactForm" novalidate="novalidate">
+						<div class="col-md-12 form-group">
+						
+							<p>Адрес электронной почты:</p>{{ form.username }}
+							<p>Пароль:</p>{{ form.password }}
+						</div>
+							{% csrf_token %}
         {% comment %} <div class="col-md-12 form-group">
             <input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
         </div>
@@ -71,3 +70,7 @@
 {% endblock content %}
 
 
+{% comment %} <p>Имя:{{ form.username }}</p>
+										<p>Пароль:{{ form.password1 }}</p>
+										<p>Повторите введённый пароль:{{ form.password2 }}</p>
+										<p>{{ form.email }}</p> {% endcomment %}
