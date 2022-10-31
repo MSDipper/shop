@@ -14,6 +14,7 @@ from email.mime import application
 from pathlib import Path
 
 import os
+from telnetlib import LOGOUT
 
 #SECRET_KEY
 # from dotenv import load_dotenv 
@@ -120,6 +121,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+AUTH_USER_MODEL = 'account.User'
+
+LOGOUT_REDIRECT_URL = 'pages'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
