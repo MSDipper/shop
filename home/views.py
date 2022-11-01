@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import TemplateView
 from blog.models import Post
 from shop.models import Product
 
+
+class HomeListView(TemplateView):
+    template_name = 'home/home_list.html'
 
     
 class Search(ListView):
