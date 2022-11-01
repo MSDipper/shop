@@ -3,13 +3,13 @@ from django.views.generic import ListView
 from blog.models import Post
 from shop.models import Product
 
+
+    
 class Search(ListView):
     paginate_by = 3
     
     def get_queryset(self):
-         post = Post.objects.filter(title__icontains=self.request.GET.get("q"))
-         product = Product.objects.filter(title__icontains=self.request.GET.get("q"))
-         return post, product
+        return Post.objects.filter(title__icontains=self.request.GET.get("q")) or Product.objects.filter(title__icontains=self.request.GET.get("q")) 
     
     
     def get_context_data(self, *args, **kwargs):

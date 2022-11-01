@@ -33,7 +33,7 @@ class Tag(models.Model):
 
 
 class Ip(models.Model): 
-    ip = models.CharField(max_length=100)
+    ip = models.CharField(max_length=100, blank=True, null=True)
     
 
     class Meta:
@@ -49,8 +49,15 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     description = RichTextField(verbose_name='Описание')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
-    views = models.ManyToManyField(Ip, related_name="post_views", verbose_name='Просмотры', default=0)
     slug = models.SlugField(max_length=250, unique=True, verbose_name='URL')
+    views = models.ManyToManyField(
+        Ip, 
+        related_name="post_views", 
+        verbose_name='Просмотры', 
+        default=[0], 
+        blank=True,
+        null=True
+        )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name='Автор',
@@ -80,7 +87,6 @@ class Post(models.Model):
         ''' Счётчик просмотров '''
         return self.views.count()
     
-
     
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
