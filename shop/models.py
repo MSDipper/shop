@@ -1,4 +1,5 @@
 from email.policy import default
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
@@ -64,6 +65,21 @@ class Specification(models.Model):
     def __str__(self):
         return f'{self.name}'  
 
+
+class Color(models.Model):
+    """ Окрас продукта """
+    name = models.CharField(max_length=100, verbose_name='Цвет')
+    slug = models.SlugField(max_length=100, verbose_name='URL')
+     
+    
+    class Meta:
+        verbose_name = 'Окрас'
+        verbose_name_plural = 'Краски'
+
+
+    def __str__(self):
+        return f'{self.name}'
+    
 
 class ImageProduct(models.Model):
     """ Изображение """
