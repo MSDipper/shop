@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     'ckeditor',
     'captcha',
+    'mptt',
     
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',    
