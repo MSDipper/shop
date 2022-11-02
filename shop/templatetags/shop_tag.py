@@ -1,5 +1,6 @@
 from django import template
 from shop.models import Category
+from django.db.models import Count
 
 
 register = template.Library()
@@ -7,4 +8,4 @@ register = template.Library()
 
 @register.simple_tag()
 def get_list_categories():
-    return Category.objects.all()
+    return Category.objects.annotate(category_count=Count('product')).all() 

@@ -1,16 +1,20 @@
+{% load mptt_tags shop_tag %}
+
+
 <ul class="main-categories">
-    {% for category in product.category.all %}
+    {% get_list_categories as list_category %}
+    {% recursetree list_category %}
         <li class="main-nav-list">
+
             <a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"><span
-                class="lnr lnr-arrow-right"></span>{{ category.name }}<span class="number">(53)</span>
-            </a>
-            <ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable">
-                <li class="main-nav-list child"><a href="#">Frozen Fish<span class="number">(13)</span></a></li>
-                <li class="main-nav-list child"><a href="#">Dried Fish<span class="number">(09)</span></a></li>
-                <li class="main-nav-list child"><a href="#">Fresh Fish<span class="number">(17)</span></a></li>
-                <li class="main-nav-list child"><a href="#">Meat Alternatives<span class="number">(01)</span></a></li>
-                <li class="main-nav-list child"><a href="#">Meat<span class="number">(11)</span></a></li>
-            </ul>
+                class="lnr lnr-arrow-right"></span>{{ node.name }}<span class="number">{{ node.category_count}}
+            {% if not node.is_leaf_node %}
+                <ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable">
+                        <li class="main-nav-list child"><a href="#"> {{ children }}<span class="number">{{ node.category_count}}</span></a></li>
+                </ul>
+            {% endif %}
         </li>
-    {% endfor %}
+    {% endrecursetree %}
 </ul>
+
+
