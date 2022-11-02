@@ -107,6 +107,13 @@ class Product(models.Model):
     main_image = models.ImageField(upload_to='images/', verbose_name='Главное изображение продукта', null=True)
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True, null=True)
     description = RichTextField(verbose_name='Описание')
+    color = models.ForeignKey(
+        Color, 
+        verbose_name='Цвет',
+        on_delete=models.SET_NULL, 
+        null=True,
+        blank=True
+        )
     category = models.ForeignKey(
         Category, 
         related_name='product',
