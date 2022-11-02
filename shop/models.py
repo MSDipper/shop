@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
@@ -10,6 +11,7 @@ class Category(MPTTModel):
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
+        default='',
         null=True,
         blank=True,
         related_name='children'
