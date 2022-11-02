@@ -1,10 +1,10 @@
 from django.contrib import admin
-
+from mptt.admin import MPTTModelAdmin
 from shop.models import Category, Brand, Specification, ImageProduct, Product, Comment, RatingStar, Rating, Reviews
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
     prepopulated_fields = {'slug': ('name',), }
     save_as = True
     save_on_top = True

@@ -11,7 +11,6 @@ class Category(MPTTModel):
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
-        default='',
         null=True,
         blank=True,
         related_name='children'
