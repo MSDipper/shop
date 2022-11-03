@@ -29,6 +29,11 @@ class BrandAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+@admin.register(Color)
+class BrandAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',), }
+    save_as = True
+    save_on_top = True
 
 
 @admin.register(Product)
@@ -38,7 +43,6 @@ class ProductAdmin(admin.ModelAdmin):
     save_on_top = True
 
 admin.site.register(Specification)
-admin.site.register(Color)
 admin.site.register(ImageProduct)
 admin.site.register(Comment)
 admin.site.register(RatingStar)
