@@ -10,6 +10,7 @@ class BrandColor:
     def get_brand(self):
         return Brand.objects.annotate(brand_count=Count('product')).all()
     
+    
     def get_color(self):
         return Color.objects.annotate(color_count=Count('product')).all()
 
