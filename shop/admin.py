@@ -10,7 +10,8 @@ from shop.models import (
                         Comment,
                         RatingStar,
                         Rating,
-                        Reviews
+                        Reviews,
+                        WeekProduct
                         )
 
 
@@ -42,7 +43,9 @@ class ProductAdmin(admin.ModelAdmin):
     save_as = True
     save_on_top = True
 
+
 admin.site.register(Specification)
+admin.site.register(WeekProduct)
 admin.site.register(ImageProduct)
 admin.site.register(Comment)
 admin.site.register(RatingStar)

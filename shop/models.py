@@ -152,6 +152,20 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_single', args=[self.id, self.slug])
     
+    
+class WeekProduct(models.Model):
+    """ Товары этой недели """
+    week_product = models.ManyToManyField(Product, verbose_name='Товары недели')
+
+
+    class Meta:
+        verbose_name = 'Товар этой недели'
+        verbose_name_plural = 'Товары этой недели'
+        
+        
+    def __str__(self):
+        return f'{self.week_product}'  
+
 
 class Comment(models.Model):
     """ Комментарии """
