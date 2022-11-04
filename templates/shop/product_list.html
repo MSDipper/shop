@@ -3,23 +3,11 @@
 {% block content %}
 
 	<!-- Start Banner Area -->
-{% include 'shop/include/top_nav.html' %}
+		{% include 'shop/include/top_nav.html' %}
 	<!-- End Banner Area -->
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-3 col-lg-4 col-md-5">
-				<div class="sidebar-filter mt-50">
-					<div class="top-filter-head">Product Filters</div>
-					
-						{% include "shop/include/sidebar.html" %}
-				</div>
 
-				<div class="sidebar-categories">
-					<div class="head">Browse Categories</div>
-					{% include 'shop/include/sidebar_category.html' %}
-				</div>
-			</div>
+	{% include "shop/include/sidebar.html" %}
+	
 			<div class="col-xl-9 col-lg-8 col-md-7">
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
