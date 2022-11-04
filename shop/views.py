@@ -21,7 +21,7 @@ class ShopListView(BrandColor, ListView):
     template_name = 'shop/product_list.html'
     
     def get_queryset(self):
-        return Product.objects.filter(published=True, category__slug=self.kwargs.get("slug")).select_related('category')
+        return Product.objects.filter(published=True).select_related('category')
     
     
     
