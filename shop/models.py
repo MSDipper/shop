@@ -155,7 +155,10 @@ class Product(models.Model):
     
 class WeekProduct(models.Model):
     """ Товары этой недели """
-    week_product = models.ManyToManyField(Product, verbose_name='Товары недели')
+    title = models.CharField(max_length=250, verbose_name='Заголовок', blank=True)
+    price = models.DecimalField(verbose_name='Цена', max_digits=6, decimal_places=2, default=0)
+    old_price = models.DecimalField(verbose_name='Старая цена', max_digits=6, decimal_places=2, default=0)
+    image = models.ImageField(upload_to='images/', verbose_name='Изображение продукта', null=True)
 
 
     class Meta:
@@ -164,7 +167,7 @@ class WeekProduct(models.Model):
         
         
     def __str__(self):
-        return f'{self.week_product}'  
+        return f'{self.title}'  
 
 
 class Comment(models.Model):

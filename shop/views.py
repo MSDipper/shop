@@ -5,6 +5,7 @@ from cart.forms import CartAddProductForm
 from django.db.models import Count
 from django.db.models import Q
 
+
 class BrandColor:
     """ Фильтрация по брендам и цвету """
     def get_brand(self):

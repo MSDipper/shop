@@ -1,5 +1,9 @@
 from django.urls import path
-from shop.views import ShopListView, product_detail, FilterProduct
+from shop.views import(
+                    ShopListView,
+                    product_detail,
+                    FilterProduct,
+                    )
 
 
 urlpatterns = [
