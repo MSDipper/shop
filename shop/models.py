@@ -247,6 +247,7 @@ class Reviews(models.Model):
     )
     product = models.ForeignKey(
         Product,
+        related_name="review",
         verbose_name="Продукт",
         on_delete=models.CASCADE
     )
