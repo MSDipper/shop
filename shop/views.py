@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from shop.models import Product, Brand, Color, Comment
 from cart.forms import CartAddProductForm
 from django.db.models import Count, Q
-from shop.forms import CommentForm
+from shop.forms import CommentForm, ReviewForm
 from django.views.generic.base import View
 
 
@@ -41,6 +41,20 @@ class CreateComment(View):
         return redirect(product.get_absolute_url())  
 
 
+class AddReview(View):
+    """Отзывы"""
+    def post(self, request, pk):
+        form = ReviewForm(request.POST)
+        product = Product.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            if request.POST.get("parent", None):
+                form.parent_id = int(request.POST.get("parent"))
+            form.product = product
+            form.save()
+        return redirect(product.get_absolute_url())
+
+
 class ProductDetailView(DetailView):
     """ Полное описание продукта """
     model = Product
@@ -50,6 +64,7 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['cart_product_form'] = CartAddProductForm() # Форма выбора кол-ва и добавление в карзину
         context['form'] = CommentForm()
+        context['form_review'] = ReviewForm()
         return context
     
     

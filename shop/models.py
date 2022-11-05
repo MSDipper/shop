@@ -226,7 +226,7 @@ class Rating(models.Model):
     product = models.ForeignKey(Product, verbose_name="Продукт", on_delete=models.CASCADE, related_name="rating")
 
     def __str__(self):
-        return f"{self.star} - {self.movie}"
+        return f"{self.star}"
 
     class Meta:
         verbose_name = "Рейтинг"
@@ -252,7 +252,7 @@ class Reviews(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name} - {self.movie}"
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Отзыв"

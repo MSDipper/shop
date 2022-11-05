@@ -303,25 +303,22 @@
 									<li><a href="#"><i class="fa fa-star"></i></a></li>
 								</ul>
 								<p>Outstanding</p>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+
+								<form class="row contact_form" action="{% url 'add_review' pk=product.id %}" method="post" id="contactForm" novalidate="novalidate">
+									{% csrf_token %}
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Your Full name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Full name'">
+											{{ form_review.name }}
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
+											{{ form_review.email }}
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
+											{{ form_review.message }}
 										</div>
 									</div>
 									<div class="col-md-12 text-right">
