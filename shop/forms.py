@@ -1,8 +1,16 @@
 from django import forms
 from shop.models import Comment
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 class CommentForm(forms.ModelForm):
+    captcha = ReCaptchaField(
+                widget=ReCaptchaV2Checkbox,
+                error_messages={'invalid':'Повторите'}
+                )
+    
+    
     class Meta:
         model = Comment
         fields = ('name', 'email', 'photo', 'message')
