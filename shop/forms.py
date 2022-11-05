@@ -22,10 +22,10 @@ class CommentForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-    # captcha = ReCaptchaField(
-    #             widget=ReCaptchaV2Checkbox,
-    #             error_messages={'invalid':'Повторите'}
-    #             )
+    captcha = ReCaptchaField(
+                widget=ReCaptchaV2Checkbox,
+                error_messages={'invalid':'Повторите'}
+                )
     
     
     class Meta:
