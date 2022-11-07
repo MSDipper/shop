@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from shop.models import Product, Brand, Color, Comment
 from cart.forms import CartAddProductForm
 from django.db.models import Count, Q
-from shop.forms import CommentForm, ReviewForm
+from shop.forms import CommentForm, ReviewForm, RatingForm
 from django.views.generic.base import View
 
 
@@ -65,6 +65,7 @@ class ProductDetailView(DetailView):
         context['cart_product_form'] = CartAddProductForm() # Форма выбора кол-ва и добавление в карзину
         context['form'] = CommentForm()
         context['form_review'] = ReviewForm()
+        context['star'] = RatingForm()
         return context
     
     
