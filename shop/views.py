@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from shop.models import Product, Brand, Color, Comment
+from shop.models import Product, Brand, Color, Rating
 from cart.forms import CartAddProductForm
 from django.db.models import Count, Q
 from shop.forms import CommentForm, ReviewForm, RatingForm
 from django.views.generic.base import View
+from django.http import HttpResponse
 
 
 class BrandColor:
@@ -95,3 +96,24 @@ class FilterProduct(BrandColor, ListView):
         return queryset
 
 
+class AddStarRating(View):
+    """Добавление рейтинга фильму"""
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+    
+    def post(self, request):
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            Rating.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                product_id=int(request.POST.get("product")),
+                defaults={'star_id': int(request.POST.get("star"))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)
