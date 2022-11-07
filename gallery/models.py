@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class MyLife(models.Model):
     ''' О жизни '''
     title = models.CharField(verbose_name='Заголовок', max_length=50)
