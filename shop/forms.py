@@ -1,5 +1,5 @@
 from django import forms
-from shop.models import Comment, Reviews
+from shop.models import Comment, Reviews, Rating, RatingStar
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
@@ -36,3 +36,14 @@ class ReviewForm(forms.ModelForm):
                 'email': forms.EmailInput(attrs={'class':"form-control", 'placeholder': 'Email Address'}),
                 'message': forms.Textarea(attrs={'class':"form-control", 'placeholder': 'Message'})
             }
+
+
+class RatingForm(forms.ModelForm):
+    ''' Форма добавление рейтинга '''
+    star = forms.ModelChoiceField(
+        queryset=RatingStar.objects.all(), widget=forms.RadioSelect(), empty_label=None
+    )
+    
+    class Meta:
+        model = Rating
+        fields = ('star',)
