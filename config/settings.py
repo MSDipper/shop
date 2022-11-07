@@ -17,6 +17,8 @@ import os
 from telnetlib import LOGOUT
 
 #SECRET_KEY
+# create file .env
+# add SECRET_KEY
 # from dotenv import load_dotenv 
 #load_dotenv()
 
@@ -59,7 +61,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'shop.apps.ShopConfig',
     'blog.apps.BlogConfig',
-
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [
