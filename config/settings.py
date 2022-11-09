@@ -16,11 +16,6 @@ from pathlib import Path
 import os
 from telnetlib import LOGOUT
 
-#SECRET_KEY
-# create file .env
-# add SECRET_KEY
-# from dotenv import load_dotenv 
-#load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+
+#SECRET_KEY
+# create file .env
+# add SECRET_KEY
+# from dotenv import load_dotenv 
+#load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(tvr0s-o9!r1y7o86d6$1jy7j=i)og=b#_-l2g4czsxc@67@la'
 
