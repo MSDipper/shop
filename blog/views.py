@@ -1,5 +1,4 @@
-from itertools import count
-from unicodedata import category
+from django.views.generic import ListView
 from django.shortcuts import render
 from blog.models import Post, Ip, Category
 from django.shortcuts import get_object_or_404
@@ -16,14 +15,10 @@ def get_client_ip(request):
     return ip
 
 
-def blog(request):
-    post = Post.objects.all()
-        
-    context = {
-        'post_list':post,
-    }
-    return render(request, 'blog/post_list.html', context)
-
+class PostListView(ListView):
+    model = Post
+    paginate_by = 3
+    
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
