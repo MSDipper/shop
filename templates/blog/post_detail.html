@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
+                        <h4>Comments</h4>
                         {% for comment in post.comment.all %}
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">
@@ -140,6 +140,8 @@
                                 {{ form.message }}
                             </div> 
                             {{ form.captcha }}
+                        </br>
+                        </br>
                             <button type="submit" value="submit" class="primary-btn submit_btn">Post Comment</button>
                         </form>
                     </div>
@@ -149,4 +151,5 @@
         </div>
     </section>
     <!--================Blog Area =================-->
+    
 {% endblock content %}
