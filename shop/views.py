@@ -9,7 +9,7 @@ from django.http import HttpResponse
 
 
 class BrandColor:
-    """ Фильтрация по брендамcart_product_form и цвету """
+    """ Фильтрация по брендам и цвету """
     def get_brand(self):
         return Brand.objects.annotate(brand_count=Count('product')).all()
     
@@ -29,7 +29,7 @@ class ShopListView(BrandColor, ListView):
     
     
 class CreateComment(View):
-    """ Отзывы """
+    """ Отправка коммента """
     def post(self, request, pk):
         form = CommentForm(request.POST)
         product = Product.objects.get(id=pk)
@@ -43,7 +43,7 @@ class CreateComment(View):
 
 
 class AddReview(View):
-    """Отзывы"""
+    """ Отзывы  """
     def post(self, request, pk):
         form = ReviewForm(request.POST)
         product = Product.objects.get(id=pk)
@@ -97,7 +97,7 @@ class FilterProduct(BrandColor, ListView):
 
 
 class AddStarRating(View):
-    """Добавление рейтинга фильму"""
+    """Добавление рейтинга продукту"""
     def get_client_ip(self, request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:

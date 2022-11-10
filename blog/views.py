@@ -49,3 +49,11 @@ class GetTagListView(ListView):
     paginate_by = 6
     def get_queryset(self):
         return Post.objects.filter(tag__slug=self.kwargs.get('slug'))
+    
+
+class SearchPost(ListView):
+    paginate_by = 3
+    
+    def get_queryset(self):
+        return Post.objects.filter(title__icontains=self.request.GET.get("q"))
+    
