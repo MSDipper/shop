@@ -37,3 +37,10 @@ def blog_detail(request, slug):
         'categories':categories,
     }
     return render(request, 'blog/post_detail.html', context)
+
+
+class GetCategoryListView(ListView):
+    paginate_by = 6
+    def get_queryset(self):
+        return Post.objects.filter(category__slug=self.kwargs.get('slug')).select_related('category')
+    
