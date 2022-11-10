@@ -89,7 +89,7 @@ class ProductDetailView(DetailView):
 
 
 class FilterProduct(BrandColor, ListView):
-    ''' Фильтр фильмов '''
+    ''' Фильтр Брендов '''
     def get_queryset(self):
         queryset = Product.objects.filter(
             Q(brand__in=self.request.GET.getlist('brand')) | Q(color__in=self.request.GET.getlist('color')))
