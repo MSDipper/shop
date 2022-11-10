@@ -1,8 +1,10 @@
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from blog.models import Post, Ip, Category
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
+from blog.forms import CommentPostForm
+from django.views.generic.base import View
 
 
 def get_client_ip(request):
@@ -31,8 +33,10 @@ def blog_detail(request, slug):
     else:
         Ip.objects.create(ip=ip)
         post.views.add(Ip.objects.get(ip=ip)) 
-        
+    
+    form = CommentPostForm()
     context = {
+        'form':form,
         'post':post,
         'categories':categories,
     }
@@ -56,4 +60,15 @@ class SearchPost(ListView):
     
     def get_queryset(self):
         return Post.objects.filter(title__icontains=self.request.GET.get("q"))
-    
+
+
+class AddComment(View):
+    """ Отправка коммента """
+    def post(self, request, pk):
+        form = CommentPostForm(request.POST)
+        post = Post.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.post = post
+            form.save()
+        return redirect(post.get_absolute_url())

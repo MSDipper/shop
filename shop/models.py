@@ -3,6 +3,7 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
 
+
 class Category(MPTTModel):
     """ Категория """
     name = models.CharField(max_length=150, verbose_name='Имя')

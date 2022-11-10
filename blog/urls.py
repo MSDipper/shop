@@ -4,10 +4,13 @@ from blog.views import(
                     GetCategoryListView, 
                     GetTagListView, 
                     SearchPost,
+                    AddComment,
                     blog_detail
                     )
 
+
 urlpatterns = [
+    path('comments/<int:pk>/', AddComment.as_view(), name='add_comment'),
     path('search_post/', SearchPost.as_view(), name='search_post'),
     path('tag/<slug:slug>/', GetTagListView.as_view(), name='get_tag'),    
     path('category/<slug:slug>/', GetCategoryListView.as_view(), name='get_category'),    

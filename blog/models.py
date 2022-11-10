@@ -98,12 +98,27 @@ class Comment(models.Model):
     publish = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     photo = models.ImageField(verbose_name='Фото', upload_to='photo/', blank=True, null=True)
     message = models.TextField(max_length=500, verbose_name='Текст')
-    post = models.ForeignKey(Post, related_name='comment', verbose_name='Комментарий', on_delete=models.SET_NULL, blank=True, null=True)
+    post = models.ForeignKey(
+        Post,
+        related_name='comment',
+        verbose_name='Комментарий', 
+        on_delete=models.SET_NULL,
+        blank=True, 
+        null=True
+        )
+    parent = models.ForeignKey(
+        'self',
+        verbose_name="Родитель",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
 
 
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+        
         
     def __str__(self):
         return f'{self.name} - {self.email}'
