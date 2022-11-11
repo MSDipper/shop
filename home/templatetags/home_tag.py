@@ -8,4 +8,4 @@ register = template.Library()
 
 @register.simple_tag()
 def get_products():
-    return Product.objects.all()
+    return Product.objects.filter(published=True).select_related('color')

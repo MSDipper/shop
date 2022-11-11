@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.simple_tag()
 def get_list_categories():
-    return Category.objects.annotate(category_count=Count('product')).all() 
+    return Category.objects.annotate(category_count=Count('product')).all()
 
 
 @register.simple_tag()

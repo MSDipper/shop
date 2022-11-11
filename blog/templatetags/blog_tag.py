@@ -8,9 +8,8 @@ register = template.Library()
 
 @register.simple_tag()
 def get_list_categories():
-    return Category.objects.annotate(category_count=Count('post')).all() 
-
+    return Category.objects.annotate(category_count=Count('post'))
 
 @register.simple_tag()
 def get_tags():
-    return Tag.objects.all() 
+    return Tag.objects.all()
