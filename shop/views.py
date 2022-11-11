@@ -25,7 +25,7 @@ class ShopListView(BrandColor, ListView):
     template_name = 'shop/product_list.html'
     
     def get_queryset(self):
-        return Product.objects.filter(published=True)
+        return Product.objects.filter(published=True).select_related('category')
     
     
 class CreateComment(View):
@@ -117,3 +117,9 @@ class AddStarRating(View):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
+
+
+class GetCategoryProductListView(ListView):
+    paginate_by = 6
+    def get_queryset(self):
+        return Product.objects.filter(category__slug=self.kwargs.get('slug'))

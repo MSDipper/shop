@@ -21,6 +21,9 @@ class PostListView(ListView):
     model = Post
     paginate_by = 3
     
+    def get_queryset(self):
+        return Post.objects.all().select_related('author').select_related('category')
+    
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -52,7 +55,7 @@ class GetCategoryListView(ListView):
 class GetTagListView(ListView):
     paginate_by = 6
     def get_queryset(self):
-        return Post.objects.filter(tag__slug=self.kwargs.get('slug'))
+        return Post.objects.filter(tag__slug=self.kwargs.get('slug')).prefetch_related('tag')
     
 
 class SearchPost(ListView):
