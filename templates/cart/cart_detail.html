@@ -2,120 +2,120 @@
 
 {% block content %}
     <!-- Start Banner Area -->
-
+        {% include 'cart/include/top_nav.html' %}
     <!-- End Banner Area -->
 
     <!--================Cart Area =================-->
-    <section class="cart_area">
-        <div class="container">
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in cart %}
-                                {% with product=item.product %}
-                                    {% if cart|length > 0 %}
-                                        <tr>
-                                            <td>
-                                                <div class="media">
-                                                    <div class="d-flex">
-                                                        <img src="{{ product.main_image.url }}" alt="">
+        <section class="cart_area">
+            <div class="container">
+                <div class="cart_inner">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                    {% with product=item.product %}
+                                        {% if cart|length > 0 %}
+                                            <tr>
+                                                <td>
+                                                    <div class="media">
+                                                        <div class="d-flex">
+                                                            <img src="{{ product.main_image.url }}" alt="">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <p>{{ product.title }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="media-body">
-                                                        <p>{{ product.title }}</p>
+                                                </td>
+                                                <td>
+                                                    <h5>${{ product.price }}</h5>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        {{ item.quantity }}
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5>${{ product.price }}</h5>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    {{ item.quantity }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5>${{ item.total_price }}</h5>
-                                            </td>
-                                            <td>
-                                                <h5><a href="{% url 'cart_remove' product.id%}">Remove</a></h5>
-                                            </td>
-                                        </tr>
-                                    {% else %}
-                                        Your cart is empty.
-                                    {% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                            <tr class="bottom_button">
-                                <td>
-                                    <a class="gray_btn" href="{% url 'cart_detail' %}">Update Cart</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                {% if cart.coupon %}
-                                    <tr class="subtotal">
-                                        <td>Subtotal</td>
-                                        <td colspan="4"></td>
-                                        <td class="num">${{ cart.get_total_price }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            "{{ cart.coupon.code }}" coupon
-                                            ({{ cart.coupon.discount }}% off)
-                                        </td>
-                                        <td colspan="4"></td>
-                                        <td class="num neg">
-                                            - ${{ cart.get_discount|floatformat:"2" }}
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                                <tr class="total">
-                                    <td>Total</td>
-                                    <td colspan="4"></td>
-                                    <td class="num">
-                                        ${{ cart.get_total_price_after_discount|floatformat:"2" }}
+                                                </td>
+                                                <td>
+                                                    <h5>${{ item.total_price }}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5><a href="{% url 'cart_remove' product.id%}">Remove</a></h5>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            Your cart is empty.
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endfor %}
+                                <tr class="bottom_button">
+                                    <td>
+                                        <a class="gray_btn" href="{% url 'cart_detail' %}">Update Cart</a>
                                     </td>
                                 </tr>
-                            </tr>
-                           
-                               
-                            <tr class="out_button_area">
-                                <td>
+                                <tr>
+                                    {% if cart.coupon %}
+                                        <tr class="subtotal">
+                                            <td>Subtotal</td>
+                                            <td colspan="4"></td>
+                                            <td class="num">${{ cart.get_total_price }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                "{{ cart.coupon.code }}" coupon
+                                                ({{ cart.coupon.discount }}% off)
+                                            </td>
+                                            <td colspan="4"></td>
+                                            <td class="num neg">
+                                                - ${{ cart.get_discount|floatformat:"2" }}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <td colspan="4"></td>
+                                        <td class="num">
+                                            ${{ cart.get_total_price_after_discount|floatformat:"2" }}
+                                        </td>
+                                    </tr>
+                                </tr>
+                            
+                                
+                                <tr class="out_button_area">
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
-                                    <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="{% url 'shop' %}">Continue Shopping</a>
-                                        <a class="primary-btn" href="{% url "order_create" %}">Proceed to checkout</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <form action='{% url "apply" %}' method="post">
-                        <h5>{{ coupon_apply_form }}
-                            <input type="submit"style="background: #ffb600;color: white;" class="gray_btn" value="Apply">
-                        </h5>
-                        {% csrf_token %}
-                    </form>
+                                    </td>
+                                    <td>
+                                        <div class="checkout_btn_inner d-flex align-items-center">
+                                            <a class="gray_btn" href="{% url 'shop' %}">Continue Shopping</a>
+                                            <a class="primary-btn" href="{% url "order_create" %}">Proceed to checkout</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form action='{% url "apply" %}' method="post">
+                            <h5>{{ coupon_apply_form }}
+                                <input type="submit"style="background: #ffb600;color: white;" class="gray_btn" value="Apply">
+                            </h5>
+                            {% csrf_token %}
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <!--================End Cart Area =================-->
 
 
