@@ -98,7 +98,7 @@
                                         </div>
                                     </div>
                                     <div class="reply-btn">
-                                        <a href="#formComment" onclick='addComment("{{ comment.name }}", "{{ comment.id }}")' class="btn-reply text-uppercase">reply</a>
+                                        <a href="#formComment" onclick="addComment('{{ comment.name }}', '{{ comment.id }}')" class="btn-reply text-uppercase">reply</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         <h4>Leave a Reply</h4>
                         <form method="post" action="{% url 'add_comment' post.id%}" id='formComment'>
                         {% csrf_token %}
-                            <input type='hidden' name='parent' id='contactparent' value=''>
+                            <input type='hidden' name='parent' id='contactparent' value="">
                             <div class="form-group form-inline">
                             <div class="form-group col-lg-6 col-md-6 name">
                                 {{ form.name }}
@@ -156,7 +156,7 @@
     <script>
         function addReview(name, id) {
             document.getElementById('contactparent').value = id;
-            document.getElementById('parent').value = id;
+            document.getElementById('commentblog').innerText = `${name},`
         }
     </script>
 {% endblock content %}
