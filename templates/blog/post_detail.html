@@ -128,7 +128,7 @@
                         <h4>Leave a Reply</h4>
                         <form method="post" action="{% url 'add_comment' post.id%}" id='formComment'>
                         {% csrf_token %}
-                            <input type='hidden' name='parent' id='contactparent' >
+                            <input type='hidden' name='parent' id='contactparent' value=''>
                             <div class="form-group form-inline">
                             <div class="form-group col-lg-6 col-md-6 name">
                                 {{ form.name }}
@@ -153,4 +153,10 @@
     </section>
     <!--================Blog Area =================-->
     
+    <script>
+        function addReview(name, id) {
+            document.getElementById('contactparent').value = id;
+            document.getElementById('parent').value = id;
+        }
+    </script>
 {% endblock content %}
