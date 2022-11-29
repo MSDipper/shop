@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
+    """ Категория """
     name = models.CharField(max_length=200, verbose_name='Имя')
     slug = models.SlugField(max_length=200, verbose_name='URL', unique=True)
     
@@ -20,6 +21,7 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
+    """ Теги """
     name = models.CharField(max_length=100, unique=True, verbose_name='Name')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
     
@@ -33,6 +35,7 @@ class Tag(models.Model):
 
 
 class Ip(models.Model): 
+    """ Ip для подсчёта просмотров """
     ip = models.CharField(max_length=100, blank=True, null=True)
     
 
@@ -45,6 +48,7 @@ class Ip(models.Model):
 
 
 class Post(models.Model):
+    """ Посты """
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     description = RichTextField(verbose_name='Описание')
@@ -93,6 +97,7 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
+    """ Комментарии """
     name = models.CharField(verbose_name='Имя', max_length=150)
     email = models.EmailField(max_length=254)
     publish = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
