@@ -34,7 +34,7 @@ def order_create(request):
             # очистка корзины
             cart.clear()
             # запуск асинхронной задачи celery
-            # order_created.delay(order.id)
+            order_created.delay(order.id)
             return render(request, 'orders/created.html',
                           {'order': order})
     else:
