@@ -28,11 +28,29 @@
 ##### 5) Выполнить команду для выполнения миграций
 
     python manage.py migrate
+
+##### 6) Запустите redis на pc или через контейнер Docker
+
+    redis-cli -h 0.0.0.0 -p 6379
     
-##### 6) Создать суперпользователя
+    or
+
+    docker pull redis
+
+##### 7) Запустите в консоле Celery
+
+    celery -A shop worker -l info
+ 
+
+##### 8) Запустите в консоле flower для отслежавания состояния задач
+
+    celery -A shop flower
+
+
+##### 9) Создать суперпользователя
 
     python manage.py createsuperuser
     
-##### 7) Запустить сервер
+##### 10) Запустить сервер
 
     python manage.py runserver
