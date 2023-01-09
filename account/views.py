@@ -6,10 +6,12 @@ from django.views.generic import TemplateView
 
 
 class PagesPage(TemplateView):
+    ''' Страница отображения формы входа '''
     template_name = 'account/pages.html'
     
 
 class RegisterUser(View):
+    """ Регистрация пользователей """
     template_name = 'account/register/register.html'
 
     def get(self, request):

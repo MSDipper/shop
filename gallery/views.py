@@ -7,7 +7,6 @@ class Gallery():
     def get_life(self):
         return MyLife.objects.all()
 
-    
     def get_image(self):
         return ImageStyleLife.objects.all()
 

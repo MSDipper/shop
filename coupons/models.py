@@ -11,12 +11,10 @@ class Coupon(models.Model):
     discount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], verbose_name='Процент скидки купона')
     active = models.BooleanField(verbose_name='Активность купона')
     
-    
     class Meta:
         verbose_name = 'Купон'
         verbose_name_plural = 'Купоны'
         
-    
     def __str__(self):
         return self.code
     

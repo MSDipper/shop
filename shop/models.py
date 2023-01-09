@@ -16,15 +16,12 @@ class Category(MPTTModel):
         related_name='children'
         )
     
-    
     class Meta:
         verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
-        
+        verbose_name_plural = 'Категории'  
         
     def get_absolute_url(self):
         return reverse('product_list_by_category', args=[self.slug])
-    
     
     def __str__(self):
         return self.name        
@@ -35,7 +32,6 @@ class Brand(models.Model):
     name = models.CharField(max_length=150, verbose_name='Имя')
     slug = models.SlugField(max_length=150, verbose_name='URL', unique=True)
     
-
     class Meta:
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
@@ -55,26 +51,22 @@ class Specification(models.Model):
     freshness_duration = models.IntegerField(verbose_name='Свежесть')
     when_packeting = models.CharField(max_length=150, verbose_name='При упаковке')
     
-
     class Meta:
         verbose_name = 'Характеристика'
         verbose_name_plural = 'Характеристики'
         
-        
     def __str__(self):
         return f'{self.name}'  
-
+    
 
 class Color(models.Model):
     """ Окрас продукта """
     name = models.CharField(max_length=100, verbose_name='Цвет')
     slug = models.SlugField(max_length=100, verbose_name='URL')
-     
     
     class Meta:
         verbose_name = 'Окрас'
         verbose_name_plural = 'Краски'
-
 
     def __str__(self):
         return f'{self.name}'
@@ -84,11 +76,9 @@ class ImageProduct(models.Model):
     """ Изображение """
     image = models.ImageField(upload_to='images/', verbose_name='Изображения к продукту')
     
-    
     class Meta:
         verbose_name = 'Изображение к продукту'
         verbose_name_plural = 'Изображения к продукту'
-
 
     def __str__(self):
         return f'{self.image}'
@@ -137,17 +127,14 @@ class Product(models.Model):
         verbose_name='Изображения'
         )
     
-    
     class Meta:
         index_together = (('id', 'slug'),)
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         
-        
     def __str__(self):
         return self.title
     
-        
     def get_absolute_url(self):
         return reverse('product_single', args=[self.id, self.slug])
     
@@ -159,11 +146,9 @@ class WeekProduct(models.Model):
     old_price = models.DecimalField(verbose_name='Старая цена', max_digits=6, decimal_places=2, default=0)
     image = models.ImageField(upload_to='images/', verbose_name='Изображение продукта', null=True)
 
-
     class Meta:
         verbose_name = 'Товар этой недели'
         verbose_name_plural = 'Товары этой недели'
-        
         
     def __str__(self):
         return f'{self.title}'  

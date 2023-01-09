@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from orders.models import OrderItemList, Order
 import csv
 import datetime
@@ -7,6 +6,7 @@ from django.http import HttpResponse
 
 
 def export_to_csv(modeladmin, request, queryset):
+    ''' Скачивание файлов в формате csv '''
     opts = modeladmin.model._meta
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename={}.csv'.format(opts.verbose_name)

@@ -10,7 +10,6 @@ class CommentPostForm(forms.ModelForm):
                 error_messages={'invalid':'Повторите'}
                 )
     
-    
     class Meta:
         model = Comment
         fields = ('name', 'email', 'message')

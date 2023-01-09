@@ -4,12 +4,10 @@ from ckeditor.fields import RichTextField
 from django.urls import reverse
 
 
-
 class Category(models.Model):
     """ Категория """
     name = models.CharField(max_length=200, verbose_name='Имя')
     slug = models.SlugField(max_length=200, verbose_name='URL', unique=True)
-    
 
     class Meta:
         verbose_name = 'Категории'
@@ -19,12 +17,10 @@ class Category(models.Model):
         return self.name
 
 
-
 class Tag(models.Model):
     """ Теги """
     name = models.CharField(max_length=100, unique=True, verbose_name='Name')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
-    
     
     class Meta:
         verbose_name = 'Тег'
@@ -38,7 +34,6 @@ class Ip(models.Model):
     """ Ip для подсчёта просмотров """
     ip = models.CharField(max_length=100, blank=True, null=True)
     
-
     class Meta:
         verbose_name = 'IP'
         verbose_name_plural = 'IP'
@@ -79,18 +74,16 @@ class Post(models.Model):
         )
     tag = models.ManyToManyField(Tag, related_name='post', verbose_name='Тег')
     
-
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        
+         
     def __str__(self):
         return self.title
     
     def total_views(self):
         ''' Счётчик просмотров '''
         return self.views.count()
-    
     
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
@@ -119,11 +112,9 @@ class Comment(models.Model):
         null=True
     )
 
-
     class Meta:
         verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
-        
+        verbose_name_plural = 'Комментарии' 
         
     def __str__(self):
         return f'{self.name} - {self.email}'

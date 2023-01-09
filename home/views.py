@@ -21,7 +21,6 @@ class Search(ListView):
                 title__icontains=self.request.GET.get("q")
                 )
     
-    
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['q'] = self.request.GET.get('q')
