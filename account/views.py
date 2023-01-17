@@ -5,7 +5,7 @@ from account.forms import AuthenticationForm
 from django.views.generic import TemplateView
 
 
-class PagesPage(TemplateView):
+class AccountPage(TemplateView):
     ''' Страница отображения формы входа '''
     template_name = 'account/pages.html'
     
