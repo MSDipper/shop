@@ -39,21 +39,23 @@ def blog_detail(request, slug):
     
     form = CommentPostForm()
     context = {
-        'form':form,
-        'post':post,
-        'categories':categories,
+        'form': form,
+        'post': post,
+        'categories': categories,
     }
     return render(request, 'blog/post_detail.html', context)
 
 
 class GetCategoryListView(ListView):
     paginate_by = 6
+
     def get_queryset(self):
         return Post.objects.filter(category__slug=self.kwargs.get('slug')).select_related('category')
 
 
 class GetTagListView(ListView):
     paginate_by = 6
+
     def get_queryset(self):
         return Post.objects.filter(tag__slug=self.kwargs.get('slug')).prefetch_related('tag')
     
