@@ -33,7 +33,7 @@ def cart_detail(request):
                             initial={'quantity': item['quantity'],
                             'update': True}
                             )
-    coupon_apply_form = CouponApplyForm()
+    coupon_apply_form = CouponApplyForm() # Подключаем систему купонов
     context = {
         'cart': cart,
         'coupon_apply_form': coupon_apply_form
