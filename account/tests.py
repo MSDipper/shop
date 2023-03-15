@@ -31,7 +31,7 @@ class TestRegisterUser(TestCase):
         self.assertIn('password2', response.context['form'].errors)
 
     def test_post_ok(self):
-        ''' Тестирование регистрацип пользователя '''
+        ''' Тестирование регистрации пользователя '''
         email = 'drinks@gmail.com'
         payload = {
             'username': 'username',
