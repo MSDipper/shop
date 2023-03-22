@@ -1,4 +1,4 @@
-<h2 alingn='center'></h2>
+<h2 alingn='center'>Shop</h2>
 
 ### Описание проекта:
     Интернет магазин.
